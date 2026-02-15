@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -16,7 +18,7 @@ public class PaymentEventDto {
 
     @NotNull(message = "amount обязателен")
     @Positive(message = "amount должен быть положительным")
-    private Integer amount;  // В ТЕНГЕ: 150000 = 150 000 ₸
+    private BigDecimal amount;  // В ТЕНГЕ: 150000 = 150 000 ₸
 
     @NotBlank(message = "currency обязателен")
     @Pattern(regexp = "^[A-Z]{3}$", message = "currency должен быть 3 буквы")

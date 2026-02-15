@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
@@ -23,7 +24,7 @@ public class PaymentEventEntity {
     private String eventId;
 
     @Column(nullable = false)
-    private Integer amount;  // В ТЕНГЕ
+    private BigDecimal amount;  // В ТЕНГЕ
 
     @Column(nullable = false, length = 3)
     private String currency = "KZT";

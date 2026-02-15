@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -18,7 +19,9 @@ public class MatchingService {
     // Толерантность в ТЕНГЕ
     private static final int AMOUNT_TOLERANCE = 1; // ±1 ₸ (можешь поставить 10)
 
-    public DealEntity findMatchingDeal(Integer paymentAmount) {
+    BigDecimal tolerance = BigDecimal.valueOf(AMOUNT_TOLERANCE);
+
+    public DealEntity findMatchingDeal(BigDecimal paymentAmount) {
         log.debug("Looking for deal with amount: {}", paymentAmount);
 
         List<DealEntity> exactMatches = dealRepository.findByAmountAndStatus(
@@ -34,8 +37,8 @@ public class MatchingService {
             return exactMatches.get(0);
         }
 
-        int minAmount = paymentAmount - AMOUNT_TOLERANCE;
-        int maxAmount = paymentAmount + AMOUNT_TOLERANCE;
+        BigDecimal minAmount = paymentAmount.subtract(tolerance);
+        BigDecimal maxAmount = paymentAmount.add(tolerance);
 
         List<DealEntity> fuzzyMatches = dealRepository.findByAmountRangeAndStatus(
                 minAmount, maxAmount, "WAITING_PAYMENT");

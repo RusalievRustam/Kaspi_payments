@@ -3,6 +3,7 @@ package com.kaspi.payment.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
@@ -17,7 +18,7 @@ public class DealEntity {
     private Long id;
 
     @Column(nullable = false)
-    private Integer amount;
+    private BigDecimal amount;
 
     @Column(nullable = false, length = 3)
     private String currency = "KZT";
