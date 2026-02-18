@@ -16,8 +16,6 @@ public class PaymentEventDto {
     @Size(max = 100, message = "eventId не более 100 символов")
     private String eventId;
 
-    @NotNull(message = "amount обязателен")
-    @Positive(message = "amount должен быть положительным")
     private BigDecimal amount;  // В ТЕНГЕ: 150000 = 150 000 ₸
 
     @NotBlank(message = "currency обязателен")
